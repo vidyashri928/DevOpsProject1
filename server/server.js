@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import cors from "cors";
 import records from "./routes/record.js";
@@ -9,6 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/record", records);
 
+app.use(express.static("public"));
+app.get("*", (req, res) => res.sendFile(path.resolve("public", "index.html")));
 // start the Express server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
